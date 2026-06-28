@@ -1,15 +1,41 @@
 import os
 import zipfile
 import shutil
+import getopt, sys
 
 PATH_TO_OUTPUT = "./output/"
 PATH_TO_ZIPS = "./temp/zips/"
 PATH_TO_TEMP_SETS = "./temp/temp_sets/"
 
-
-
 def main():
-    print("Starting MSE Santa prepper! Hop on that Goblin Sleigh Ride.")
+    SATAN = False
+
+    # Arguments to run satan-ified version
+    args = sys.argv[1:]
+    options = "hn"
+    long_options = ["Help", "help", "Satan", "satan", "SATAN"]
+
+    try:
+        arguments, values = getopt.getopt(args, options, long_options)
+        for currentArg, currentVal in arguments:
+            if currentArg in ("-h", "--Help", "--help"):
+                print("-n --satan: run satan version instead")
+                print("-h --help: help options")
+                print("\n")
+                return
+            elif currentArg in ("-Satan", "--satan", "--SATAN", "-n"):
+                SATAN = True
+    except getopt.error as err:
+        print(str(err))
+        return
+
+
+    if SATAN:
+        print("Mwahaha! Starting Satan prepper instead. Hope you prepped your Pitchfork Devils")
+    else:
+        print("Starting MSE Santa prepper! Hop on that Goblin Sleigh Ride.")
+
+
 
     # check and see if output and temp are not clear, and prompt if we clear them
     # clean up output and temp as a preemptive measure
@@ -79,12 +105,25 @@ def main():
         # additional credit and credit brush
         txt = txt.replace("\tcustom_card_number:", "\tadditional_credit: " + designer +"\n\tadditional_credit_brush: mechanics\n\tcustom_card_number:")
 
+
+        ############## SATAN ###############
+        # TODO 
+        if SATAN:
+            txt = txt.replace("card_code_text_3: \n", 
+                              "card_code_text_3: \n" + 
+                              "\tvorthos_box: SATAN\n")
+
+
         # illustrator overwrites
         # TODO maybe find more of these 
         ###
-        txt = txt.replace(": Art by Santa", ": " + designer)
-        txt = txt.replace(": Santa", ": " + designer)
+        txt = txt.replace(": Art by Santa\n", ": " + designer + "\n")
+        txt = txt.replace(": Santa\n", ": " + designer  + "\n")
         txt = txt.replace(": Me\n", ": " + designer + "\n")
+
+        # Satan replacements
+        txt = txt.replace(": Art by Satan\n", ": " + designer + "\n")
+        txt = txt.replace(": Satan\n", ": " + designer  + "\n")
         # TODO alert how many of these were changed?
 
         # actually save the text into a set file

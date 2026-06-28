@@ -17,6 +17,9 @@ This python script preps all Santa files for the final Egghub upload
 
 ## Additional Notes
 
+To run the Secret Satan prepper, do `-h` or `--satan` at the end of the call (like `python main.py -h`)
+
+
 If you are getting some things complaining, make sure you have the most recent MSE. 
 
 If things still complain, try opening up and re-saving the files. This was built with newer versions (as of 5/27/26) in mind; hopefully not much has changed and my error handling is adequate enough
